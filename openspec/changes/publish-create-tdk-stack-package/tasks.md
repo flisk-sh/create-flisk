@@ -12,5 +12,5 @@
 
 ## 3. Verify first release readiness
 
-- [ ] 3.1 Confirm npm organization access, GitHub Packages visibility, and package write permissions needed for the release.
+- [x] 3.1 Confirm npm organization access, GitHub Packages visibility, and package write permissions needed for the release.
 - [x] 3.2 Validate the release workflow and packed artifact without publishing, then document the first release tag/version procedure.
