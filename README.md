@@ -181,3 +181,41 @@ The product promise is intentionally direct: start small, keep the whole landsca
   &nbsp;&nbsp;/&nbsp;&nbsp;
   MIT License
 </p>
+
+---
+
+## Package Registries
+
+This repository can be distributed as `@tdk-landscape/create-tdk-stack` through npm and GitHub Packages. The package contains the built landing page and its app sources; it does **not** install a `create-tdk-stack` executable or scaffold generated microservice projects.
+
+### Install from npm
+
+```bash
+npm install @tdk-landscape/create-tdk-stack
+```
+
+### Install from GitHub Packages
+
+Configure the `@tdk-landscape` scope to use GitHub Packages and authenticate with a GitHub personal access token (classic) that has `read:packages` access:
+
+```ini
+# ~/.npmrc
+@tdk-landscape:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
+```
+
+Then install the package:
+
+```bash
+npm install @tdk-landscape/create-tdk-stack
+```
+
+Keep the token private; do not commit it to a repository.
+
+### Maintainer release
+
+The registry release workflow runs only for a published GitHub Release. Before the first release, maintainers must add an npm publishing token as the repository Actions secret `NPM_TOKEN`, confirm that the npm organization grants package publishing access, and confirm the repository's GitHub Actions token can write packages. The workflow requires the release tag to match the package version (`v0.1.0` for version `0.1.0`), builds and validates one package archive, then publishes that same archive to both registries.
+
+Create a release from a matching version tag after updating `package.json` and `package-lock.json`. The Pages workflow remains separate and continues to deploy on pushes to `main`.
+
+If one registry publish succeeds and the other fails, use the retained `create-tdk-stack-package` workflow artifact to identify the exact package archive and version. Retry only the registry that failed if it accepts that version; otherwise increment the version and publish a new release to both registries.

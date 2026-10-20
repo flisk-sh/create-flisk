@@ -1,9 +1,8 @@
 {
-  "name": "create-tdk-stack",
+  "name": "@tdk-landscape/create-tdk-stack",
   "version": "0.1.0",
-  "private": true,
   "type": "module",
-  "description": "Forge TDK landing page for starting local-first microservice stacks with TDK CLI.",
+  "description": "Forge TDK landing page app for local-first microservice stacks. This package does not provide a project-scaffolding CLI.",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "vite build",
@@ -18,5 +17,32 @@
     "typescript": "latest",
     "vite": "latest"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tdk-landscape/create-tdk-stack.git"
+  },
+  "homepage": "https://github.com/tdk-landscape/create-tdk-stack#readme",
+  "bugs": {
+    "url": "https://github.com/tdk-landscape/create-tdk-stack/issues"
+  },
+  "files": [
+    "dist/",
+    "src/",
+    "public/",
+    "index.html",
+    "vite.config.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "tdk",
+    "landing-page",
+    "local-first",
+    "microservices"
+  ]
 }

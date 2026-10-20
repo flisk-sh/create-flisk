@@ -1,0 +1,112 @@
+name: Publish package registries
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: package-release-${{ github.event.release.tag_name }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install and build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Check release version and package contents
+        id: package
+        shell: bash
+        run: |
+          set -euo pipefail
+          tag_version="${GITHUB_REF_NAME#v}"
+          package_version="$(node -p "require('./package.json').version")"
+          if [[ "$tag_version" != "$package_version" ]]; then
+            echo "::error::Release tag version '$tag_version' does not match package version '$package_version'."
+            exit 1
+          fi
+
+          mkdir -p "$RUNNER_TEMP/create-tdk-stack-package"
+          npm pack --json --pack-destination "$RUNNER_TEMP/create-tdk-stack-package" > "$RUNNER_TEMP/create-tdk-stack-pack.json"
+          tarball="$RUNNER_TEMP/create-tdk-stack-package/$(node -p "JSON.parse(require('fs').readFileSync(process.env.RUNNER_TEMP + '/create-tdk-stack-pack.json', 'utf8'))[0].filename")"
+          if [[ ! -f "$tarball" ]]; then
+            echo "::error::npm pack did not produce the expected package archive."
+            exit 1
+          fi
+
+          node --input-type=module - "$RUNNER_TEMP/create-tdk-stack-pack.json" <<'NODE'
+          import fs from 'node:fs';
+          const report = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'))[0];
+          const files = new Set(report.files.map(({ path }) => path));
+          for (const required of ['package.json', 'README.md', 'LICENSE', 'index.html', 'dist/index.html', 'src/main.jsx']) {
+            if (!files.has(required)) throw new Error(`Package is missing required file: ${required}`);
+          }
+          for (const file of files) {
+            if (file.startsWith('node_modules/') || file.includes('/node_modules/') || file.startsWith('.git/')) {
+              throw new Error(`Package contains excluded content: ${file}`);
+            }
+          }
+          console.log(`Validated ${report.filename} (${report.size} bytes)`);
+          NODE
+
+          echo "tarball=$tarball" >> "$GITHUB_OUTPUT"
+          echo "version=$package_version" >> "$GITHUB_OUTPUT"
+
+      - name: Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          PACKAGE_TARBALL: ${{ steps.package.outputs.tarball }}
+          PACKAGE_VERSION: ${{ steps.package.outputs.version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -z "${NODE_AUTH_TOKEN:-}" ]]; then
+            echo "::error::NPM_TOKEN is not configured in repository Actions secrets."
+            exit 1
+          fi
+          npmrc="$RUNNER_TEMP/npm-publish.npmrc"
+          printf '//registry.npmjs.org/:_authToken=%s\n' "$NODE_AUTH_TOKEN" > "$npmrc"
+          NPM_CONFIG_USERCONFIG="$npmrc" npm publish "$PACKAGE_TARBALL" --registry=https://registry.npmjs.org/ --access public || {
+            echo "::error::npm publication failed for version $PACKAGE_VERSION. See the retained workflow artifact for recovery."
+            exit 1
+          }
+
+      - name: Publish to GitHub Packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PACKAGE_TARBALL: ${{ steps.package.outputs.tarball }}
+          PACKAGE_VERSION: ${{ steps.package.outputs.version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          npmrc="$RUNNER_TEMP/github-packages.npmrc"
+          printf '@tdk-landscape:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=%s\n' "$NODE_AUTH_TOKEN" > "$npmrc"
+          NPM_CONFIG_USERCONFIG="$npmrc" npm publish "$PACKAGE_TARBALL" --registry=https://npm.pkg.github.com/ || {
+            echo "::error::GitHub Packages publication failed for version $PACKAGE_VERSION after npm publication. See the retained workflow artifact for recovery."
+            exit 1
+          }
+
+      - name: Retain package archive for release recovery
+        if: always() && steps.package.outputs.tarball != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: create-tdk-stack-package-${{ steps.package.outputs.version }}
+          path: ${{ steps.package.outputs.tarball }}
+          if-no-files-found: error
+          retention-days: 30
