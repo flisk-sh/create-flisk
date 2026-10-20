@@ -1,6 +1,6 @@
 {
   "name": "@tdk-landscape/create-tdk-stack",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "description": "Forge TDK landing page app for local-first microservice stacks. This package does not provide a project-scaffolding CLI.",
   "scripts": {

@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD013 MD033 MD041 -->
 
 <p align="center">
-  <img src="docs/readme-hero.svg" alt="TDK stack landscape" width="100%">
+  <img src="https://raw.githubusercontent.com/tdk-landscape/create-tdk-stack/HEAD/docs/readme-hero.svg" alt="TDK stack landscape" width="100%" style="max-width: 100%;">
 </p>
 
 <p align="center">
@@ -61,7 +61,7 @@ npm run preview
 
 ## What This Is
 
-Forge TDK is not the generated microservice stack itself. It is the front door: a fast, visual explanation of what `npm create tdk-stack@latest` should feel like for teams who want serious local infrastructure without hand-wiring every service.
+Forge TDK is not the generated microservice stack itself. It is the front door: a fast, visual explanation of creating a local-first microservice project with `npm init @tdk-landscape/microservices`.
 
 The page frames the starter around three ideas:
 
@@ -82,7 +82,7 @@ The page frames the starter around three ideas:
 The app is intentionally small, but the interaction layer is rich enough to sell the product idea:
 
 - Sticky glass navigation with direct jumps to stack, flow, and community sections.
-- Cinematic hero with copyable `npm create tdk-stack@latest` command.
+- Cinematic hero with copyable `npm init @tdk-landscape/microservices` command.
 - Animated terminal simulation showing the scaffold journey.
 - Infinite technology marquee for the generated stack.
 - Dense stack grid using Lucide icons for the core tools.

@@ -24,7 +24,7 @@ import './styles.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const command = 'npm create tdk-stack@latest';
+const command = 'npm init @tdk-landscape/microservices';
 
 const stack = [
   ['Bun', Zap, 'Fast installs and TypeScript-first service runtime.'],
@@ -48,8 +48,8 @@ const featureCards = [
 ];
 
 const terminalLines = [
-  '$ npm create tdk-stack@latest',
-  'Need to install create-tdk-stack. Ok to proceed? yes',
+  '$ npm init @tdk-landscape/microservices',
+  'Need to install @tdk-landscape/create-microservices. Ok to proceed? yes',
   'Project name: commerce-lab',
   'Runtime: Bun + Node.js',
   'Infrastructure: Docker, Traefik, Tilt',
