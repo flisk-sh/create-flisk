@@ -1,0 +1,73 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  spellcheck:
+    name: Spell check
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: crate-ci/typos@v1
+
+  build:
+    name: Build and validate package
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+
+      - name: Validate the packed archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm pack --json --pack-destination "$RUNNER_TEMP" > "$RUNNER_TEMP/pack.json"
+          node --input-type=module - "$RUNNER_TEMP/pack.json" <<'NODE'
+          import fs from 'node:fs';
+          const report = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'))[0];
+          if (report.name !== 'create-flisk') {
+            throw new Error(`Expected package name create-flisk, got ${report.name}`);
+          }
+          if (report.filename !== `create-flisk-${report.version}.tgz`) {
+            throw new Error(`Unexpected package archive name: ${report.filename}`);
+          }
+          const files = new Set(report.files.map(({ path }) => path));
+          for (const required of ['package.json', 'README.md', 'LICENSE', 'index.html', 'dist/index.html', 'src/main.jsx']) {
+            if (!files.has(required)) throw new Error(`Package is missing required file: ${required}`);
+          }
+          console.log(`Validated ${report.filename} (${report.size} bytes)`);
+          NODE
+
+  names:
+    name: Renamed package names
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fail on superseded organization and package names
+        shell: bash
+        run: |
+          set -euo pipefail
+          # The patterns use character classes so this workflow does not match itself.
+          if git grep -n -E "tdk[-]landscape|create[-]tdk[-]stack|tdk[-]cli[-]core" -- .; then
+            echo "::error::Superseded organization or package names are still referenced."
+            exit 1
+          fi
+          echo "No superseded names found."

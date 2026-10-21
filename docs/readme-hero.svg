@@ -43,7 +43,7 @@
     <circle cx="162" cy="132" r="7" fill="#fb7185"/>
     <circle cx="188" cy="132" r="7" fill="#facc15"/>
     <circle cx="214" cy="132" r="7" fill="#34d399"/>
-    <text x="248" y="137" fill="#f7f4ee" fill-opacity=".52" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14">create-tdk-stack</text>
+    <text x="248" y="137" fill="#f7f4ee" fill-opacity=".52" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14">create-flisk</text>
 
     <text x="166" y="226" fill="#ffffff" font-family="Geist, ui-sans-serif, system-ui, sans-serif" font-size="66" font-weight="800" letter-spacing="-1">
       Forge TDK
@@ -53,7 +53,7 @@
     </text>
 
     <rect x="166" y="310" width="402" height="58" rx="12" fill="#05070a" stroke="#ffffff" stroke-opacity=".16"/>
-    <text x="190" y="346" fill="#d9f99d" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15">npm init @tdk-landscape/microservices</text>
+    <text x="190" y="346" fill="#d9f99d" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15">npm init create-microservices</text>
     <path d="M168 390H1232" stroke="url(#line)" stroke-width="2"/>
 
     <g transform="translate(742 197)">

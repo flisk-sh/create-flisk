@@ -20,7 +20,7 @@
 
 ## Forge TDK
 
-`create-tdk-stack` is a polished landing page and starter surface for the TDK CLI: the create-t3-app idea, reimagined for local-first microservice systems.
+`create-flisk` is a polished landing page and starter surface for the TDK CLI: the create-t3-app idea, reimagined for local-first microservice systems.
 
 It presents the generated stack story in one focused React/Vite experience: Bun, Node.js, TypeScript, Docker, Traefik, Tilt, Prisma, PostgreSQL, NATS JetStream, Infisical, Playwright, C4 diagrams, and `AGENTS.md`.
 
@@ -41,7 +41,7 @@ It presents the generated stack story in one focused React/Vite experience: Bun,
 
 ```bash
 git clone https://github.com/flisk-sh/create-flisk.git
-cd create-tdk-stack
+cd create-flisk
 
 npm install
 npm run dev
@@ -61,7 +61,7 @@ npm run preview
 
 ## What This Is
 
-Forge TDK is not the generated microservice stack itself. It is the front door: a fast, visual explanation of creating a local-first microservice project with `npm init @tdk-landscape/microservices`.
+Forge TDK is not the generated microservice stack itself. It is the front door: a fast, visual explanation of creating a local-first microservice project with `npm init create-microservices`.
 
 The page frames the starter around three ideas:
 
@@ -82,7 +82,7 @@ The page frames the starter around three ideas:
 The app is intentionally small, but the interaction layer is rich enough to sell the product idea:
 
 - Sticky glass navigation with direct jumps to stack, flow, and community sections.
-- Cinematic hero with copyable `npm init @tdk-landscape/microservices` command.
+- Cinematic hero with copyable `npm init create-microservices` command.
 - Animated terminal simulation showing the scaffold journey.
 - Infinite technology marquee for the generated stack.
 - Dense stack grid using Lucide icons for the core tools.
@@ -90,7 +90,7 @@ The app is intentionally small, but the interaction layer is rich enough to sell
 - High-contrast call to action linking back to the TDK Landscape ecosystem.
 
 ```text
-create-tdk-stack/
+create-flisk/
 ├── .github/workflows/pages.yml
 ├── docs/
 │   ├── readme-bento.svg
@@ -123,7 +123,7 @@ create-tdk-stack/
 The Vite config uses:
 
 ```js
-base: '/create-tdk-stack/'
+base: '/create-flisk/'
 ```
 
 That keeps asset paths correct when the site is published under the repository path on GitHub Pages.
@@ -186,36 +186,36 @@ The product promise is intentionally direct: start small, keep the whole landsca
 
 ## Package Registries
 
-This repository can be distributed as `@tdk-landscape/create-tdk-stack` through npm and GitHub Packages. The package contains the built landing page and its app sources; it does **not** install a `create-tdk-stack` executable or scaffold generated microservice projects.
+This repository is distributed as `create-flisk` on npm and as `@flisk-sh/create-flisk` on GitHub Packages. The package contains the built landing page and its app sources; it does **not** install a `create-flisk` executable or scaffold generated microservice projects.
 
 ### Install from npm
 
 ```bash
-npm install @tdk-landscape/create-tdk-stack
+npm install create-flisk
 ```
 
 ### Install from GitHub Packages
 
-Configure the `@tdk-landscape` scope to use GitHub Packages and authenticate with a GitHub personal access token (classic) that has `read:packages` access:
+GitHub Packages serves scoped npm packages only, so the GitHub Packages copy is published under the organization scope as `@flisk-sh/create-flisk`. Configure the `@flisk-sh` scope to use GitHub Packages and authenticate with a GitHub personal access token (classic) that has `read:packages` access:
 
 ```ini
 # ~/.npmrc
-@tdk-landscape:registry=https://npm.pkg.github.com
+@flisk-sh:registry=https://npm.pkg.github.com
 //npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
 ```
 
 Then install the package:
 
 ```bash
-npm install @tdk-landscape/create-tdk-stack
+npm install @flisk-sh/create-flisk
 ```
 
 Keep the token private; do not commit it to a repository.
 
 ### Maintainer release
 
-The registry release workflow runs only for a published GitHub Release. Before the first release, maintainers must add an npm publishing token as the repository Actions secret `NPM_TOKEN`, confirm that the npm organization grants package publishing access, and confirm the repository's GitHub Actions token can write packages. The workflow requires the release tag to match the package version (`v0.1.0` for version `0.1.0`), builds and validates one package archive, then publishes that same archive to both registries.
+The registry release workflow runs only for a published GitHub Release. Before the first release, maintainers must claim the unscoped `create-flisk` name on npm and add a trusted publisher for it (repository `flisk-sh/create-flisk`, workflow `publish-package.yml`); trusted publishing replaces the previous `NPM_TOKEN` secret because an organization token cannot publish unscoped names. The workflow requires the release tag to match the package version (`v0.1.0` for version `0.1.0`), builds and validates one package archive, publishes that archive to npm, and publishes a scoped `@flisk-sh/create-flisk` archive to GitHub Packages.
 
 Create a release from a matching version tag after updating `package.json` and `package-lock.json`. The Pages workflow remains separate and continues to deploy on pushes to `main`.
 
-If one registry publish succeeds and the other fails, use the retained `create-tdk-stack-package` workflow artifact to identify the exact package archive and version. Retry only the registry that failed if it accepts that version; otherwise increment the version and publish a new release to both registries.
+If one registry publish succeeds and the other fails, use the retained `create-flisk-package` workflow artifact to identify the exact package archive and version. Retry only the registry that failed if it accepts that version; otherwise increment the version and publish a new release to both registries.
