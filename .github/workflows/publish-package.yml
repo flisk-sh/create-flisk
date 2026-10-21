@@ -125,9 +125,19 @@ jobs:
         env:
           PACKAGE_TARBALL: ${{ steps.package.outputs.tarball }}
           PACKAGE_VERSION: ${{ steps.package.outputs.version }}
+          # A token is only needed for a package's first version: npm cannot publish a
+          # package that does not exist yet through OIDC. Once the trusted publisher is
+          # configured, this secret is not needed any more.
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         shell: bash
         run: |
           set -euo pipefail
+          if [ -n "${NPM_TOKEN:-}" ]; then
+            echo "Publishing with the NPM_TOKEN secret."
+            export NODE_AUTH_TOKEN="$NPM_TOKEN"
+          else
+            echo "No NPM_TOKEN secret: publishing with npm trusted publishing (OIDC)."
+          fi
           if npm view "create-flisk@$PACKAGE_VERSION" version >/dev/null 2>&1; then
             echo "create-flisk@$PACKAGE_VERSION is already published, skipping."
             exit 0
@@ -141,9 +151,19 @@ jobs:
         env:
           PACKAGE_TARBALL: ${{ steps.scoped-package.outputs.tarball }}
           PACKAGE_VERSION: ${{ steps.package.outputs.version }}
+          # A token is only needed for a package's first version: npm cannot publish a
+          # package that does not exist yet through OIDC. Once the trusted publisher is
+          # configured, this secret is not needed any more.
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         shell: bash
         run: |
           set -euo pipefail
+          if [ -n "${NPM_TOKEN:-}" ]; then
+            echo "Publishing with the NPM_TOKEN secret."
+            export NODE_AUTH_TOKEN="$NPM_TOKEN"
+          else
+            echo "No NPM_TOKEN secret: publishing with npm trusted publishing (OIDC)."
+          fi
           if npm view "@flisk-sh/create-flisk@$PACKAGE_VERSION" version >/dev/null 2>&1; then
             echo "@flisk-sh/create-flisk@$PACKAGE_VERSION is already published, skipping."
             exit 0
