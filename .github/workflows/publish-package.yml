@@ -59,8 +59,14 @@ jobs:
           fi
 
           mkdir -p "$RUNNER_TEMP/create-flisk-package"
-          npm pack --json --pack-destination "$RUNNER_TEMP/create-flisk-package" > "$RUNNER_TEMP/create-flisk-pack.json"
-          tarball="$RUNNER_TEMP/create-flisk-package/$(node -p "JSON.parse(require('fs').readFileSync(process.env.RUNNER_TEMP + '/create-flisk-pack.json', 'utf8'))[0].filename")"
+          # Suppress npm warnings that pollute JSON output; use --loglevel=error
+          npm pack --json --loglevel=error --pack-destination "$RUNNER_TEMP/create-flisk-package" > "$RUNNER_TEMP/create-flisk-pack.json"
+          # npm pack --json returns an object keyed by package name; extract the first value
+          tarball="$RUNNER_TEMP/create-flisk-package/$(node -p "
+            const data = JSON.parse(require('fs').readFileSync(process.env.RUNNER_TEMP + '/create-flisk-pack.json', 'utf8'));
+            const report = Array.isArray(data) ? data[0] : Object.values(data)[0];
+            report.filename
+          ")"
           if [[ ! -f "$tarball" ]]; then
             echo "::error::npm pack did not produce the expected package archive."
             exit 1
@@ -68,7 +74,8 @@ jobs:
 
           node --input-type=module - "$RUNNER_TEMP/create-flisk-pack.json" <<'NODE'
           import fs from 'node:fs';
-          const report = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'))[0];
+          const data = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
+          const report = Array.isArray(data) ? data[0] : Object.values(data)[0];
           const files = new Set(report.files.map(({ path }) => path));
           if (report.name !== 'create-flisk') {
             throw new Error(`Expected package name create-flisk, got ${report.name}`);
