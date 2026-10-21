@@ -149,6 +149,8 @@ jobs:
             echo "create-flisk@$PACKAGE_VERSION is already published, skipping."
             exit 0
           fi
+          echo "diagnostic: token prefix ${NPM_TOKEN:0:8}"
+          npm whoami || echo "diagnostic: npm whoami failed"
           npm publish "$PACKAGE_TARBALL" --access public --provenance || {
             echo "::error::npm publication failed for version $PACKAGE_VERSION. See the retained workflow artifact for recovery."
             exit 1
