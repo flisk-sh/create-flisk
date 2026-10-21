@@ -139,7 +139,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if [ -n "${NPM_TOKEN:-}" ]; then
+          # A secret pasted with a trailing newline makes npm reject the token, so it is
+          # trimmed before it is used.
+          NPM_TOKEN="$(printf '%s' "${NPM_TOKEN:-}" | tr -d '[:space:]')"
+          if [ -n "$NPM_TOKEN" ]; then
             echo "Publishing with the NPM_TOKEN secret."
             export NODE_AUTH_TOKEN="$NPM_TOKEN"
           else
@@ -149,8 +152,6 @@ jobs:
             echo "create-flisk@$PACKAGE_VERSION is already published, skipping."
             exit 0
           fi
-          echo "diagnostic: token prefix ${NPM_TOKEN:0:8}"
-          npm whoami || echo "diagnostic: npm whoami failed"
           npm publish "$PACKAGE_TARBALL" --access public --provenance || {
             echo "::error::npm publication failed for version $PACKAGE_VERSION. See the retained workflow artifact for recovery."
             exit 1
@@ -167,7 +168,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if [ -n "${NPM_TOKEN:-}" ]; then
+          # A secret pasted with a trailing newline makes npm reject the token, so it is
+          # trimmed before it is used.
+          NPM_TOKEN="$(printf '%s' "${NPM_TOKEN:-}" | tr -d '[:space:]')"
+          if [ -n "$NPM_TOKEN" ]; then
             echo "Publishing with the NPM_TOKEN secret."
             export NODE_AUTH_TOKEN="$NPM_TOKEN"
           else
