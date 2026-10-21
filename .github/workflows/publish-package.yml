@@ -152,7 +152,15 @@ jobs:
             echo "create-flisk@$PACKAGE_VERSION is already published, skipping."
             exit 0
           fi
-          npm publish "$PACKAGE_TARBALL" --access public --provenance || {
+          # A package that does not exist yet cannot be published directly: npm creates a
+          # 0.0.0-stage placeholder and a maintainer approves the staged version with 2FA.
+          # An existing package is published straight away.
+          if npm view "create-flisk" version >/dev/null 2>&1; then
+            publish=(npm publish)
+          else
+            publish=(npm stage publish)
+          fi
+          "${publish[@]}" "$PACKAGE_TARBALL" --access public --provenance || {
             echo "::error::npm publication failed for version $PACKAGE_VERSION. See the retained workflow artifact for recovery."
             exit 1
           }
@@ -181,7 +189,15 @@ jobs:
             echo "@flisk-sh/create-flisk@$PACKAGE_VERSION is already published, skipping."
             exit 0
           fi
-          npm publish "$PACKAGE_TARBALL" --access public --provenance || {
+          # A package that does not exist yet cannot be published directly: npm creates a
+          # 0.0.0-stage placeholder and a maintainer approves the staged version with 2FA.
+          # An existing package is published straight away.
+          if npm view "@flisk-sh/create-flisk" version >/dev/null 2>&1; then
+            publish=(npm publish)
+          else
+            publish=(npm stage publish)
+          fi
+          "${publish[@]}" "$PACKAGE_TARBALL" --access public --provenance || {
             echo "::error::npm publication failed for @flisk-sh/create-flisk version $PACKAGE_VERSION. See the retained workflow artifact for recovery."
             exit 1
           }
