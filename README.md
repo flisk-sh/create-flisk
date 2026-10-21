@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD013 MD033 MD041 -->
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/tdk-landscape/create-tdk-stack/HEAD/docs/readme-hero.svg" alt="TDK stack landscape" width="100%" style="max-width: 100%;">
+  <img src="https://raw.githubusercontent.com/flisk-sh/create-flisk/HEAD/docs/readme-hero.svg" alt="TDK stack landscape" width="100%" style="max-width: 100%;">
 </p>
 
 <p align="center">
@@ -13,7 +13,7 @@
   &nbsp;&nbsp;/&nbsp;&nbsp;
   <a href="#ship-it">Ship it</a>
   &nbsp;&nbsp;/&nbsp;&nbsp;
-  <a href="https://github.com/tdk-landscape/tdk-cli-core">TDK CLI</a>
+  <a href="https://github.com/flisk-sh/flisk">TDK CLI</a>
 </p>
 
 <br>
@@ -28,7 +28,7 @@ It presents the generated stack story in one focused React/Vite experience: Bun,
   <img src="docs/readme-marquee.svg" alt="Bun, Node.js, TypeScript, Docker, Traefik, Tilt, Prisma, PostgreSQL, NATS JetStream, Infisical, Playwright, and AGENTS.md" width="100%">
 </p>
 
-> ⭐ **This page showcases [TDK CLI](https://github.com/tdk-landscape/tdk-cli-core).** If you like it, [star tdk-cli-core on GitHub](https://github.com/tdk-landscape/tdk-cli-core) so other developers can find it.
+> ⭐ **This page showcases [TDK CLI](https://github.com/flisk-sh/flisk).** If you like it, [star tdk-cli-core on GitHub](https://github.com/flisk-sh/flisk) so other developers can find it.
 
 ---
 
@@ -40,7 +40,7 @@ It presents the generated stack story in one focused React/Vite experience: Bun,
 - npm, included with Node.js.
 
 ```bash
-git clone https://github.com/tdk-landscape/create-tdk-stack.git
+git clone https://github.com/flisk-sh/create-flisk.git
 cd create-tdk-stack
 
 npm install
@@ -173,11 +173,11 @@ The product promise is intentionally direct: start small, keep the whole landsca
 </p>
 
 <p align="center">
-  <a href="https://github.com/tdk-landscape">TDK Landscape</a>
+  <a href="https://github.com/flisk-sh">TDK Landscape</a>
   &nbsp;&nbsp;/&nbsp;&nbsp;
-  <a href="https://github.com/tdk-landscape/tdk-cli-core">TDK CLI</a>
+  <a href="https://github.com/flisk-sh/flisk">TDK CLI</a>
   &nbsp;&nbsp;/&nbsp;&nbsp;
-  <a href="https://github.com/tdk-landscape/create-tdk-stack">Repository</a>
+  <a href="https://github.com/flisk-sh/create-flisk">Repository</a>
   &nbsp;&nbsp;/&nbsp;&nbsp;
   MIT License
 </p>

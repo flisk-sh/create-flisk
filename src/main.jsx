@@ -170,7 +170,7 @@ function App() {
           <a href="#flow">Flow</a>
           <a href="#community">Community</a>
         </div>
-        <a className="icon-link" href="https://github.com/tdk-landscape/create-tdk-stack" target="_blank" rel="noreferrer" aria-label="Open GitHub repository">
+        <a className="icon-link" href="https://github.com/flisk-sh/create-flisk" target="_blank" rel="noreferrer" aria-label="Open GitHub repository">
           <ExternalLink size={19} />
         </a>
       </nav>
@@ -187,7 +187,7 @@ function App() {
           </p>
           <div className="hero-actions">
             <a className="button primary" href="#stack"><Play size={17} /> See the stack</a>
-            <a className="button secondary" href="https://github.com/tdk-landscape/create-tdk-stack" target="_blank" rel="noreferrer">GitHub</a>
+            <a className="button secondary" href="https://github.com/flisk-sh/create-flisk" target="_blank" rel="noreferrer">GitHub</a>
           </div>
           <div className="command-bar">
             <code>{command}</code>
@@ -267,8 +267,8 @@ function App() {
         <h2>Start small. Keep the whole landscape.</h2>
         <p>Forge TDK is for teams who want quick starts without mystery meat infrastructure.</p>
         <div className="community-actions">
-          <a className="button primary" href="https://github.com/tdk-landscape/create-tdk-stack" target="_blank" rel="noreferrer">Contribute</a>
-          <a className="button secondary" href="https://github.com/tdk-landscape" target="_blank" rel="noreferrer">TDK Landscape</a>
+          <a className="button primary" href="https://github.com/flisk-sh/create-flisk" target="_blank" rel="noreferrer">Contribute</a>
+          <a className="button secondary" href="https://github.com/flisk-sh" target="_blank" rel="noreferrer">TDK Landscape</a>
         </div>
       </section>
     </main>
