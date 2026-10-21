@@ -4,6 +4,17 @@ on:
   release:
     types: [published]
 
+# The package is published under two names: the unscoped "create-flisk" and the scoped
+# "@flisk-sh/create-flisk". A package has exactly one name in its package.json, so the scoped
+# publication is the same archive with the name rewritten in the packed manifest. GitHub Packages
+# serves scoped names only, so the unscoped name goes to npmjs.org alone.
+#
+# Owner setup required before the first publish succeeds: npmjs.com -> Packages -> create-flisk
+# -> Settings -> Trusted Publisher -> GitHub Actions -> organization "flisk-sh", repository
+# "create-flisk", workflow filename "publish-package.yml", allowed action "npm publish". The same
+# configuration is needed for "@flisk-sh/create-flisk" once that package exists. A package's first
+# version cannot be published through OIDC, so version 0.1.1 (or later) has to be published once
+# with an npm token before the trusted publisher can take over.
 permissions:
   contents: read
   packages: write
@@ -79,28 +90,33 @@ jobs:
           echo "tarball=$tarball" >> "$GITHUB_OUTPUT"
           echo "version=$package_version" >> "$GITHUB_OUTPUT"
 
-      # The npm name is unscoped, so it cannot live on GitHub Packages, which serves scoped packages only.
-      # The GitHub Packages copy is published under the organization scope instead.
-      - name: Build the GitHub Packages archive
-        id: github-package
+      # The scoped copy of the archive. GitHub Packages serves scoped names only, so the unscoped
+      # name goes to npmjs.org alone.
+      - name: Build the scoped archive
+        id: scoped-package
         env:
           PACKAGE_TARBALL: ${{ steps.package.outputs.tarball }}
         shell: bash
         run: |
           set -euo pipefail
-          alias_dir="$RUNNER_TEMP/github-package"
+          alias_dir="$RUNNER_TEMP/scoped-package"
           mkdir -p "$alias_dir"
           tar -xzf "$PACKAGE_TARBALL" -C "$alias_dir"
           node --input-type=module - "$alias_dir/package/package.json" <<'NODE'
           import fs from 'node:fs';
           const manifestPath = process.argv[2];
           const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+          if (manifest.name !== 'create-flisk') {
+            throw new Error(`Unexpected package name: ${manifest.name}`);
+          }
+          // Only the name changes: the version and the contents stay the ones the unscoped package
+          // was published with.
           manifest.name = '@flisk-sh/create-flisk';
           fs.writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
           NODE
           alias_tarball="$(cd "$alias_dir/package" && npm pack --pack-destination "$alias_dir" --silent)"
           if [[ ! -f "$alias_dir/$alias_tarball" ]]; then
-            echo "::error::npm pack did not produce the GitHub Packages archive."
+            echo "::error::npm pack did not produce the scoped archive."
             exit 1
           fi
           echo "tarball=$alias_dir/$alias_tarball" >> "$GITHUB_OUTPUT"
@@ -121,10 +137,26 @@ jobs:
             exit 1
           }
 
+      - name: Publish the scoped package to npm
+        env:
+          PACKAGE_TARBALL: ${{ steps.scoped-package.outputs.tarball }}
+          PACKAGE_VERSION: ${{ steps.package.outputs.version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if npm view "@flisk-sh/create-flisk@$PACKAGE_VERSION" version >/dev/null 2>&1; then
+            echo "@flisk-sh/create-flisk@$PACKAGE_VERSION is already published, skipping."
+            exit 0
+          fi
+          npm publish "$PACKAGE_TARBALL" --access public --provenance || {
+            echo "::error::npm publication failed for @flisk-sh/create-flisk version $PACKAGE_VERSION. See the retained workflow artifact for recovery."
+            exit 1
+          }
+
       - name: Publish to GitHub Packages
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PACKAGE_TARBALL: ${{ steps.github-package.outputs.tarball }}
+          PACKAGE_TARBALL: ${{ steps.scoped-package.outputs.tarball }}
           PACKAGE_VERSION: ${{ steps.package.outputs.version }}
         shell: bash
         run: |
