@@ -1,5 +1,5 @@
 {
-  "name": "@tdk-landscape/create-tdk-stack",
+  "name": "create-flisk",
   "version": "0.1.1",
   "type": "module",
   "description": "Forge TDK landing page app for local-first microservice stacks. This package does not provide a project-scaffolding CLI.",
@@ -40,6 +40,7 @@
     "access": "public"
   },
   "keywords": [
+    "flisk",
     "tdk",
     "landing-page",
     "local-first",
