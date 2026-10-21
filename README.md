@@ -28,7 +28,7 @@ It presents the generated stack story in one focused React/Vite experience: Bun,
   <img src="docs/readme-marquee.svg" alt="Bun, Node.js, TypeScript, Docker, Traefik, Tilt, Prisma, PostgreSQL, NATS JetStream, Infisical, Playwright, and AGENTS.md" width="100%">
 </p>
 
-> ⭐ **This page showcases [TDK CLI](https://github.com/flisk-sh/flisk).** If you like it, [star tdk-cli-core on GitHub](https://github.com/flisk-sh/flisk) so other developers can find it.
+> ⭐ **This page showcases [TDK CLI](https://github.com/flisk-sh/flisk).** If you like it, [star flisk on GitHub](https://github.com/flisk-sh/flisk) so other developers can find it.
 
 ---
 
