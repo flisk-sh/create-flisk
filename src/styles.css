@@ -34,7 +34,7 @@ button { font: inherit; }
   inset: 0;
   pointer-events: none;
   opacity: 0.18;
-  background-image: url('https://picsum.photos/seed/tdk-terminal-grain/1400/900');
+  background-image: url('https://picsum.photos/seed/flisk-terminal-grain/1400/900');
   background-size: cover;
   filter: grayscale(1) contrast(140%);
   mix-blend-mode: soft-light;
@@ -141,7 +141,7 @@ button { font: inherit; }
   display: inline-block;
   border-radius: 999px;
   vertical-align: middle;
-  background-image: url('https://picsum.photos/seed/tdk-cli-light/500/260');
+  background-image: url('https://picsum.photos/seed/flisk-cli-light/500/260');
   background-size: cover;
   background-position: center;
   filter: grayscale(0.2) contrast(125%) saturate(1.15);
@@ -374,7 +374,7 @@ button { font: inherit; }
 .tile-image {
   position: absolute;
   inset: 0;
-  background-image: url('https://picsum.photos/seed/tdk-service-map/900/700');
+  background-image: url('https://picsum.photos/seed/flisk-service-map/900/700');
   background-size: cover;
   background-position: center;
   filter: grayscale(0.55) contrast(125%) brightness(0.68);
@@ -383,8 +383,8 @@ button { font: inherit; }
   transition: transform 0.7s ease, opacity 0.7s ease;
 }
 
-.tile-2 .tile-image { background-image: url('https://picsum.photos/seed/tdk-node-runtime/700/900'); }
-.tile-3 .tile-image { background-image: url('https://picsum.photos/seed/tdk-routing/700/900'); }
+.tile-2 .tile-image { background-image: url('https://picsum.photos/seed/flisk-node-runtime/700/900'); }
+.tile-3 .tile-image { background-image: url('https://picsum.photos/seed/flisk-routing/700/900'); }
 .tile-4 .tile-image,
 .tile-5 .tile-image,
 .tile-6 .tile-image,
@@ -473,13 +473,13 @@ button { font: inherit; }
   border-radius: 0.65rem;
   background:
     linear-gradient(180deg, transparent, rgba(7, 11, 15, 0.92)),
-    url('https://picsum.photos/seed/tdk-workspace/900/1100') center / cover;
+    url('https://picsum.photos/seed/flisk-workspace/900/1100') center / cover;
   filter: saturate(0.95);
   transition: flex 0.7s cubic-bezier(0.22, 1, 0.36, 1), filter 0.7s ease;
 }
 
-.accordion-card:nth-child(2) { background-image: linear-gradient(180deg, transparent, rgba(7, 11, 15, 0.92)), url('https://picsum.photos/seed/tdk-code-generation/900/1100'); }
-.accordion-card:nth-child(3) { background-image: linear-gradient(180deg, transparent, rgba(7, 11, 15, 0.92)), url('https://picsum.photos/seed/tdk-hot-reload/900/1100'); }
+.accordion-card:nth-child(2) { background-image: linear-gradient(180deg, transparent, rgba(7, 11, 15, 0.92)), url('https://picsum.photos/seed/flisk-code-generation/900/1100'); }
+.accordion-card:nth-child(3) { background-image: linear-gradient(180deg, transparent, rgba(7, 11, 15, 0.92)), url('https://picsum.photos/seed/flisk-hot-reload/900/1100'); }
 .accordion-card:hover { flex: 2.2; filter: saturate(1.15) contrast(1.05); }
 
 .accordion-card h3 {

@@ -1,6 +1,6 @@
 ## Context
 
-The repository is a React/Vite landing page for the TDK stack story. It builds static output into `dist/`, deploys the site through an existing GitHub Pages workflow, and is published to npm and GitHub Packages. It does not contain a project-scaffolding CLI.
+The repository is a React/Vite landing page for the Flisk stack story. It builds static output into `dist/`, deploys the site through an existing GitHub Pages workflow, and is published to npm and GitHub Packages. It does not contain a project-scaffolding CLI.
 
 ## Goals / Non-Goals
 
@@ -28,7 +28,7 @@ The repository is a React/Vite landing page for the TDK stack story. It builds s
 
 - A failure after publishing to one registry can leave the other behind → Build and validate once before publishing; make each registry step explicit and document recovery by publishing the same version only to the registry that failed.
 - Two package names now exist for one artifact → Document both install paths and why each registry requires its own name.
-- Package consumers may assume `create-flisk` is an executable scaffold tool → Describe the artifact as the TDK landing page/app package and state that no CLI binary is provided.
+- Package consumers may assume `create-flisk` is an executable scaffold tool → Describe the artifact as the Flisk landing page/app package and state that no CLI binary is provided.
 - Registry authentication or package ownership may be incomplete → Add a release preflight and document the npm trusted publisher and GitHub organization permissions needed before the first release.
 - Including both source and built output increases package size → Define an allowlist and inspect the packed file list in CI before publication.
 

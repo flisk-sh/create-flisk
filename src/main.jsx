@@ -43,7 +43,7 @@ const stack = [
 
 const featureCards = [
   ['Describe the landscape', 'Choose service types, runtimes, databases, eventing, testing, and secrets in one tiny prompt.'],
-  ['Generate the topology', 'TDK writes manifests, Dockerfiles, routes, env contracts, diagrams, docs, and runnable service code.'],
+  ['Generate the topology', 'Flisk writes manifests, Dockerfiles, routes, env contracts, diagrams, docs, and runnable service code.'],
   ['Boot only what matters', 'Tilt starts the selected stack, Traefik routes it, and hot reload stays armed for the services you touch.']
 ];
 
@@ -159,12 +159,12 @@ function App() {
     window.setTimeout(() => setCopied(false), 1400);
   };
 
-  const manifesto = 'A tiny starter with serious defaults. Forge TDK gives you the local microservice skeleton, then gets out of the way so your team can own every generated file.';
+  const manifesto = 'A tiny starter with serious defaults. Forge Flisk gives you the local microservice skeleton, then gets out of the way so your team can own every generated file.';
 
   return (
     <main className="site-shell">
       <nav className="nav">
-        <a className="brand" href="#top"><Terminal size={18} /> Forge TDK</a>
+        <a className="brand" href="#top"><Terminal size={18} /> Forge Flisk</a>
         <div className="nav-links">
           <a href="#stack">Stack</a>
           <a href="#flow">Flow</a>
@@ -177,9 +177,9 @@ function App() {
 
       <section className="hero" id="top">
         <div className="hero-copy-block">
-          <p className="hero-kicker">The create-t3-app idea, rebuilt for local-first TDK systems.</p>
+          <p className="hero-kicker">The create-t3-app idea, rebuilt for local-first Flisk systems.</p>
           <h1>
-            The fastest way to start a real TDK stack
+            The fastest way to start a real Flisk stack
             <span className="inline-image" aria-hidden="true" />
           </h1>
           <p className="hero-copy">
@@ -247,7 +247,7 @@ function App() {
       <section className="build-flow" id="flow">
         <div className="flow-copy">
           <h2>From blank folder to live topology.</h2>
-          <p>Forge TDK keeps the demo concrete: manifests, generated files, health checks, hot reload, secrets, diagrams, and tests all land in the repo.</p>
+          <p>Forge Flisk keeps the demo concrete: manifests, generated files, health checks, hot reload, secrets, diagrams, and tests all land in the repo.</p>
         </div>
         <div className="flow-stack">
           {[
@@ -265,10 +265,10 @@ function App() {
 
       <section className="community" id="community">
         <h2>Start small. Keep the whole landscape.</h2>
-        <p>Forge TDK is for teams who want quick starts without mystery meat infrastructure.</p>
+        <p>Forge Flisk is for teams who want quick starts without mystery meat infrastructure.</p>
         <div className="community-actions">
           <a className="button primary" href="https://github.com/flisk-sh/create-flisk" target="_blank" rel="noreferrer">Contribute</a>
-          <a className="button secondary" href="https://github.com/flisk-sh" target="_blank" rel="noreferrer">TDK Landscape</a>
+          <a className="button secondary" href="https://github.com/flisk-sh" target="_blank" rel="noreferrer">Flisk</a>
         </div>
       </section>
     </main>

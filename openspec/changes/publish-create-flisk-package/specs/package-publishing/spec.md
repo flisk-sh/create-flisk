@@ -1,7 +1,7 @@
 ## ADDED Requirements
 
 ### Requirement: Registry package identity and contents
-The project SHALL publish a non-private npm package named `create-flisk` and a GitHub Packages package named `@flisk-sh/create-flisk`, both with metadata linking them to the `flisk-sh/create-flisk` repository. Each package SHALL include the production site build, required app sources, README, and license, and SHALL exclude dependencies, caches, and local-only configuration. The package description and documentation SHALL make clear that it distributes the TDK landing page app and does not provide a project-scaffolding CLI.
+The project SHALL publish a non-private npm package named `create-flisk` and a GitHub Packages package named `@flisk-sh/create-flisk`, both with metadata linking them to the `flisk-sh/create-flisk` repository. Each package SHALL include the production site build, required app sources, README, and license, and SHALL exclude dependencies, caches, and local-only configuration. The package description and documentation SHALL make clear that it distributes the Flisk landing page app and does not provide a project-scaffolding CLI.
 
 #### Scenario: Package archive is prepared
 - **WHEN** a release package is built

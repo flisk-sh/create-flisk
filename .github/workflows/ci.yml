@@ -66,7 +66,7 @@ jobs:
         run: |
           set -euo pipefail
           # The patterns use character classes so this workflow does not match itself.
-          if git grep -n -E "tdk[-]landscape|create[-]tdk[-]stack|tdk[-]cli[-]core" -- .; then
+          if git grep -n -E "flisk[-]landscape|create[-]flisk[-]stack|flisk[-]cli[-]core" -- .; then
             echo "::error::Superseded organization or package names are still referenced."
             exit 1
           fi
