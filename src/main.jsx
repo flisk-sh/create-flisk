@@ -253,7 +253,7 @@ function App() {
           {[
             ['Answer prompts', 'Pick Bun or Node, choose service shapes, add Docker, Traefik, Tilt, data, queues, and tests.'],
             ['Generate files', 'Write service.json, routes, Dockerfiles, Prisma schema, env contracts, C4 diagrams, and AGENTS.md.'],
-            ['Boot locally', 'Run tdk up and get selective startup, hot reload, verified secrets, and healthy service URLs.']
+            ['Boot locally', 'Run flisk up and get selective startup, hot reload, verified secrets, and healthy service URLs.']
           ].map(([title, copy]) => (
             <article className="flow-card" key={title}>
               <h3>{title}</h3>
