@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD013 MD033 MD041 -->
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/flisk-sh/create-flisk/HEAD/docs/readme-hero.svg" alt="TDK stack landscape" width="100%" style="max-width: 100%;">
+  <img src="https://raw.githubusercontent.com/flisk-sh/create-flisk/HEAD/docs/readme-hero.svg" alt="Flisk stack landscape" width="100%" style="max-width: 100%;">
 </p>
 
 <p align="center">
@@ -13,14 +13,14 @@
   &nbsp;&nbsp;/&nbsp;&nbsp;
   <a href="#ship-it">Ship it</a>
   &nbsp;&nbsp;/&nbsp;&nbsp;
-  <a href="https://github.com/flisk-sh/flisk">TDK CLI</a>
+  <a href="https://github.com/flisk-sh/flisk">Flisk CLI</a>
 </p>
 
 <br>
 
-## Forge TDK
+## Forge Flisk
 
-`create-flisk` is a polished landing page and starter surface for the TDK CLI: the create-t3-app idea, reimagined for local-first microservice systems.
+`create-flisk` is a polished landing page and starter surface for the Flisk CLI: the create-t3-app idea, reimagined for local-first microservice systems.
 
 It presents the generated stack story in one focused React/Vite experience: Bun, Node.js, TypeScript, Docker, Traefik, Tilt, Prisma, PostgreSQL, NATS JetStream, Infisical, Playwright, C4 diagrams, and `AGENTS.md`.
 
@@ -28,7 +28,7 @@ It presents the generated stack story in one focused React/Vite experience: Bun,
   <img src="docs/readme-marquee.svg" alt="Bun, Node.js, TypeScript, Docker, Traefik, Tilt, Prisma, PostgreSQL, NATS JetStream, Infisical, Playwright, and AGENTS.md" width="100%">
 </p>
 
-> ⭐ **This page showcases [TDK CLI](https://github.com/flisk-sh/flisk).** If you like it, [star flisk on GitHub](https://github.com/flisk-sh/flisk) so other developers can find it.
+> ⭐ **This page showcases [Flisk CLI](https://github.com/flisk-sh/flisk).** If you like it, [star flisk on GitHub](https://github.com/flisk-sh/flisk) so other developers can find it.
 
 ---
 
@@ -61,7 +61,7 @@ npm run preview
 
 ## What This Is
 
-Forge TDK is not the generated microservice stack itself. It is the front door: a fast, visual explanation of creating a local-first microservice project with `npm init create-microservices`.
+Forge Flisk is not the generated microservice stack itself. It is the front door: a fast, visual explanation of creating a local-first microservice project with `npm init create-microservices`.
 
 The page frames the starter around three ideas:
 
@@ -72,7 +72,7 @@ The page frames the starter around three ideas:
 | Boot only what matters | Use Tilt and Traefik to start selected services with hot reload and healthy local URLs. |
 
 <p align="center">
-  <img src="docs/readme-bento.svg" alt="TDK starter architecture cards" width="100%">
+  <img src="docs/readme-bento.svg" alt="Flisk starter architecture cards" width="100%">
 </p>
 
 ---
@@ -87,7 +87,7 @@ The app is intentionally small, but the interaction layer is rich enough to sell
 - Infinite technology marquee for the generated stack.
 - Dense stack grid using Lucide icons for the core tools.
 - Scroll-scrubbed manifesto text and pinned build-flow cards powered by GSAP ScrollTrigger.
-- High-contrast call to action linking back to the TDK Landscape ecosystem.
+- High-contrast call to action linking back to the Flisk ecosystem.
 
 ```text
 create-flisk/
@@ -155,7 +155,7 @@ You can also trigger the workflow manually from GitHub Actions with `workflow_di
   <img src="docs/readme-flow.svg" alt="Prompt to generated local stack flow" width="100%">
 </p>
 
-Forge TDK positions the CLI around a simple path:
+Forge Flisk positions the CLI around a simple path:
 
 ```text
 answer prompts
@@ -173,9 +173,9 @@ The product promise is intentionally direct: start small, keep the whole landsca
 </p>
 
 <p align="center">
-  <a href="https://github.com/flisk-sh">TDK Landscape</a>
+  <a href="https://github.com/flisk-sh">Flisk</a>
   &nbsp;&nbsp;/&nbsp;&nbsp;
-  <a href="https://github.com/flisk-sh/flisk">TDK CLI</a>
+  <a href="https://github.com/flisk-sh/flisk">Flisk CLI</a>
   &nbsp;&nbsp;/&nbsp;&nbsp;
   <a href="https://github.com/flisk-sh/create-flisk">Repository</a>
   &nbsp;&nbsp;/&nbsp;&nbsp;

@@ -17,7 +17,7 @@
 
   <rect width="1400" height="360" rx="22" fill="url(#bg)"/>
   <text x="96" y="75" fill="#ffffff" font-family="Geist, ui-sans-serif, system-ui, sans-serif" font-size="38" font-weight="800">From blank folder to live topology.</text>
-  <text x="98" y="110" fill="#f7f4ee" fill-opacity=".66" font-family="Geist, ui-sans-serif, system-ui, sans-serif" font-size="18">Forge TDK turns a small prompt sequence into local infrastructure your team can inspect.</text>
+  <text x="98" y="110" fill="#f7f4ee" fill-opacity=".66" font-family="Geist, ui-sans-serif, system-ui, sans-serif" font-size="18">Forge Flisk turns a small prompt sequence into local infrastructure your team can inspect.</text>
 
   <path d="M178 190H1222" stroke="url(#rail)" stroke-width="3" stroke-linecap="round"/>
   <g filter="url(#shadow)">

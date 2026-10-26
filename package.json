@@ -2,7 +2,7 @@
   "name": "create-flisk",
   "version": "0.1.2",
   "type": "module",
-  "description": "Forge TDK landing page app for local-first microservice stacks. This package does not provide a project-scaffolding CLI.",
+  "description": "Forge Flisk landing page app for local-first microservice stacks. This package does not provide a project-scaffolding CLI.",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "vite build",
