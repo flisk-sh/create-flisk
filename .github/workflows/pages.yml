@@ -39,3 +39,12 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  # The deployed site answers before the run counts as green.
+  health:
+    needs: deploy
+    uses: flisk-sh/.github/.github/workflows/deploy-health.yml@b5eeea945364038cd2143e9676b77fc9af293dfa # v1.4.0
+    permissions:
+      contents: read
+    with:
+      url: https://flisk-sh.github.io/create-flisk/
