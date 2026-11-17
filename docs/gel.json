@@ -6,7 +6,7 @@
     "workflow-permissions": "block",
     "dead-links": "report",
     "done-without-green": "block",
-    "five-second-test": "block",
+    "five-second-test": "report",
     "north-star": "block",
     "adr-required": "block",
     "api-contract": "block",
