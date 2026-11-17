@@ -18,11 +18,7 @@ import {
   Workflow,
   Zap
 } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './styles.css';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const command = 'npm init create-microservices';
 
@@ -64,7 +60,13 @@ function App() {
   const terminalRef = useRef(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    // gsap loads after first paint so it stays out of the first-load JS
+    let ctx;
+    let cancelled = false;
+    Promise.all([import('gsap'), import('gsap/ScrollTrigger')]).then(([{ default: gsap }, { ScrollTrigger }]) => {
+    if (cancelled) return;
+    gsap.registerPlugin(ScrollTrigger);
+    ctx = gsap.context(() => {
       gsap.from('.nav, .hero-kicker, .hero h1, .hero-copy, .hero-actions, .command-bar, .console-card', {
         y: 36,
         opacity: 0,
@@ -117,8 +119,12 @@ function App() {
         pinSpacing: false
       });
     });
+    });
 
-    return () => ctx.revert();
+    return () => {
+      cancelled = true;
+      if (ctx) ctx.revert();
+    };
   }, []);
 
   useEffect(() => {

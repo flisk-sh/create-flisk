@@ -6,7 +6,8 @@
     "workflow-permissions": "report",
     "dead-links": "report",
     "done-without-green": "report",
-    "five-second-test": "report"
+    "five-second-test": "report",
+    "north-star": "block"
   },
   "five_second": {
     "rendered": {
@@ -14,5 +15,17 @@
       "max_age_days": 30
     },
     "pages": []
+  },
+  "north_star": {
+    "metric": "first-load JavaScript (gzip) of the production build, entry script plus preloads",
+    "baseline": "118.95 kB gzip before gsap moved out of the first load",
+    "target": {
+      "ratio": 1.5,
+      "better": "lower"
+    },
+    "result": "docs/north-star/result.json",
+    "evidence": "docs/north-star/README.md",
+    "measure": "node bench/north-star.mjs",
+    "max_age_days": 90
   }
 }
