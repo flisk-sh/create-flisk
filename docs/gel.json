@@ -1,13 +1,18 @@
 {
-  "mode": "report",
+  "mode": "block",
   "guards": {
-    "secret-scan": "report",
+    "secret-scan": "block",
     "pinned-actions": "report",
-    "workflow-permissions": "report",
+    "workflow-permissions": "block",
     "dead-links": "report",
-    "done-without-green": "report",
+    "done-without-green": "block",
     "five-second-test": "report",
-    "north-star": "block"
+    "north-star": "block",
+    "adr-required": "block",
+    "api-contract": "block",
+    "migrations-append-only": "block",
+    "release-integrity": "block",
+    "tests-with-change": "block"
   },
   "five_second": {
     "rendered": {
