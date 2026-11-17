@@ -5,6 +5,14 @@
     "pinned-actions": "report",
     "workflow-permissions": "report",
     "dead-links": "report",
-    "done-without-green": "report"
+    "done-without-green": "report",
+    "five-second-test": "report"
+  },
+  "five_second": {
+    "rendered": {
+      "result": "bench/five-second.json",
+      "max_age_days": 30
+    },
+    "pages": []
   }
 }
