@@ -9,6 +9,9 @@ execFileSync(bin, ["build", "--logLevel", "error"], { cwd: root, stdio: ["ignore
 const html = readFileSync(root + "dist/index.html", "utf8");
 const scripts = [...html.matchAll(/<script[^>]*\ssrc="([^"]+)"/g)].map((m) => m[1]).filter((u) => !/^https?:/.test(u));
 const preloads = [...html.matchAll(/<link[^>]*rel="modulepreload"[^>]*href="([^"]+)"/g)].map((m) => m[1]);
+// No first-party script means the page markup changed shape, not that the page got light: counting only the preloads would
+// report a tiny, falsely good number. Refuse (exit 2) instead of measuring something else.
+if (scripts.length === 0) { console.error("north star: dist/index.html has no first-party <script src>, so the first-load size cannot be measured."); process.exit(2); }
 let bytes = 0;
 for (const u of [...scripts, ...preloads]) bytes += gzipSync(readFileSync(root + "dist/" + u.replace(/^\/?create-flisk\//, ""))).length;
 const value = Math.round((bytes / 1024) * 100) / 100;
