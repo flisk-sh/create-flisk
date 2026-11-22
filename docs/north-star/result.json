@@ -2,7 +2,7 @@
  "value": 72.75,
  "baseline": 118.95,
  "unit": "kB gzip of first-load JS",
- "measuredAt": "2026-11-22T02:12:48.492Z",
- "run": "https://github.com/flisk-sh/create-flisk/actions/runs/44975005439",
- "commit": "9cd09f7710c20c0b80631885f6ac06c2bbbd5f17"
+ "measuredAt": "2026-11-22T10:21:35.450Z",
+ "run": "https://github.com/flisk-sh/create-flisk/actions/runs/45012010603",
+ "commit": "0e60f086529c9d721bb4fbba81b4c53700ca19fe"
 }
