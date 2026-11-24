@@ -2,8 +2,9 @@
 // Prints {value, baseline, unit} for `gel north-star --measure`. Lower is better.
 import { execFileSync } from "node:child_process";
 import { readFileSync, existsSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import { gzipSync } from "node:zlib";
-const root = new URL("..", import.meta.url).pathname;
+const root = fileURLToPath(new URL("..", import.meta.url));
 const bin = existsSync(root + "node_modules/.bin/vite") ? root + "node_modules/.bin/vite" : "vite";
 execFileSync(bin, ["build", "--logLevel", "error"], { cwd: root, stdio: ["ignore", "inherit", "inherit"] });
 const html = readFileSync(root + "dist/index.html", "utf8");
