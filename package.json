@@ -2,13 +2,17 @@
   "name": "create-flisk",
   "version": "0.1.2",
   "type": "module",
-  "description": "Forge Flisk landing page app for local-first microservice stacks. This package does not provide a project-scaffolding CLI.",
+  "description": "Find the Flisk project scaffolder for local-first microservice stacks.",
+  "bin": {
+    "create-flisk": "bin/create-flisk.js"
+  },
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "vite build",
-    "preview": "vite preview --host 127.0.0.1"
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "node --test --test-concurrency=1 test/package.test.mjs"
   },
-  "dependencies": {
+  "devDependencies": {
     "@vitejs/plugin-react": "latest",
     "gsap": "latest",
     "lucide-react": "latest",
@@ -17,7 +21,6 @@
     "typescript": "latest",
     "vite": "latest"
   },
-  "devDependencies": {},
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -28,13 +31,7 @@
     "url": "https://github.com/flisk-sh/create-flisk/issues"
   },
   "files": [
-    "dist/",
-    "src/",
-    "public/",
-    "index.html",
-    "vite.config.js",
-    "README.md",
-    "LICENSE"
+    "bin/create-flisk.js"
   ],
   "publishConfig": {
     "access": "public"

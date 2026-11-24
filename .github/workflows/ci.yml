@@ -33,27 +33,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
-
-      - name: Validate the packed archive
-        shell: bash
-        run: |
-          set -euo pipefail
-          npm pack --json --pack-destination "$RUNNER_TEMP" > "$RUNNER_TEMP/pack.json"
-          node --input-type=module - "$RUNNER_TEMP/pack.json" <<'NODE'
-          import fs from 'node:fs';
-          const report = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'))[0];
-          if (report.name !== 'create-flisk') {
-            throw new Error(`Expected package name create-flisk, got ${report.name}`);
-          }
-          if (report.filename !== `create-flisk-${report.version}.tgz`) {
-            throw new Error(`Unexpected package archive name: ${report.filename}`);
-          }
-          const files = new Set(report.files.map(({ path }) => path));
-          for (const required of ['package.json', 'README.md', 'LICENSE', 'index.html', 'dist/index.html', 'src/main.jsx']) {
-            if (!files.has(required)) throw new Error(`Package is missing required file: ${required}`);
-          }
-          console.log(`Validated ${report.filename} (${report.size} bytes)`);
-          NODE
+      - run: npm test
 
   names:
     name: Renamed package names

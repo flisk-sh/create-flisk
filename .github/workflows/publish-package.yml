@@ -83,13 +83,12 @@ jobs:
           if (report.filename !== `create-flisk-${report.version}.tgz`) {
             throw new Error(`Unexpected package archive name: ${report.filename}`);
           }
-          for (const required of ['package.json', 'README.md', 'LICENSE', 'index.html', 'dist/index.html', 'src/main.jsx']) {
+          const expected = new Set(['package.json', 'README.md', 'LICENSE', 'bin/create-flisk.js']);
+          for (const required of expected) {
             if (!files.has(required)) throw new Error(`Package is missing required file: ${required}`);
           }
           for (const file of files) {
-            if (file.startsWith('node_modules/') || file.includes('/node_modules/') || file.startsWith('.git/')) {
-              throw new Error(`Package contains excluded content: ${file}`);
-            }
+            if (!expected.has(file)) throw new Error(`Package contains unexpected content: ${file}`);
           }
           console.log(`Validated ${report.filename} (${report.size} bytes)`);
           NODE
