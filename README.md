@@ -61,7 +61,7 @@ npm run preview
 
 ## What This Is
 
-Forge Flisk is not the generated microservice stack itself. It is the front door: a fast, visual explanation of creating a local-first microservice project with `npm init create-microservices`.
+Forge Flisk is not the generated microservice stack itself. It is the front door: a fast, visual explanation of creating a local-first microservice project with `npx create-microservices`.
 
 The page frames the starter around three ideas:
 
@@ -82,7 +82,7 @@ The page frames the starter around three ideas:
 The app is intentionally small, but the interaction layer is rich enough to sell the product idea:
 
 - Sticky glass navigation with direct jumps to stack, flow, and community sections.
-- Cinematic hero with copyable `npm init create-microservices` command.
+- Cinematic hero with copyable `npx create-microservices` command.
 - Animated terminal simulation showing the scaffold journey.
 - Infinite technology marquee for the generated stack.
 - Dense stack grid using Lucide icons for the core tools.
@@ -186,12 +186,12 @@ The product promise is intentionally direct: start small, keep the whole landsca
 
 ## Package Registries
 
-This repository is distributed as `create-flisk` on npm and as `@flisk-sh/create-flisk` on GitHub Packages. The package contains the built landing page and its app sources; it does **not** install a `create-flisk` executable or scaffold generated microservice projects.
+The `create-flisk` package on npm and `@flisk-sh/create-flisk` on GitHub Packages contain a small executable that points users to `npx create-microservices`. The package does not generate projects itself or include the landing page. Clone this repository to build or reuse the website.
 
-### Install from npm
+### Run from npm
 
 ```bash
-npm install create-flisk
+npx create-flisk
 ```
 
 ### Install from GitHub Packages

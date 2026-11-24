@@ -20,7 +20,7 @@ import {
 } from 'lucide-react';
 import './styles.css';
 
-const command = 'npm init create-microservices';
+const command = 'npx create-microservices';
 
 const stack = [
   ['Bun', Zap, 'Fast installs and TypeScript-first service runtime.'],
@@ -44,7 +44,7 @@ const featureCards = [
 ];
 
 const terminalLines = [
-  '$ npm init create-microservices',
+  '$ npx create-microservices',
   'Need to install create-microservices. Ok to proceed? yes',
   'Project name: commerce-lab',
   'Runtime: Bun + Node.js',

@@ -1,11 +1,11 @@
 ## ADDED Requirements
 
 ### Requirement: Registry package identity and contents
-The project SHALL publish a non-private npm package named `create-flisk` and a GitHub Packages package named `@flisk-sh/create-flisk`, both with metadata linking them to the `flisk-sh/create-flisk` repository. Each package SHALL include the production site build, required app sources, README, and license, and SHALL exclude dependencies, caches, and local-only configuration. The package description and documentation SHALL make clear that it distributes the Flisk landing page app and does not provide a project-scaffolding CLI.
+The project SHALL publish a non-private npm package named `create-flisk` and a GitHub Packages package named `@flisk-sh/create-flisk`, both with metadata linking them to the `flisk-sh/create-flisk` repository. Each package SHALL include the `create-flisk` executable, package manifest, README, and license, and SHALL exclude the site build, site sources, and runtime dependencies.
 
 #### Scenario: Package archive is prepared
 - **WHEN** a release package is built
-- **THEN** its manifest identifies `create-flisk`, its archive is named `create-flisk-<version>.tgz`, its file list includes the production app, README, and license, and its file list excludes local dependencies and caches
+- **THEN** its manifest identifies `create-flisk`, its archive is named `create-flisk-<version>.tgz`, and its file list contains only the executable, manifest, README, and license
 
 #### Scenario: GitHub Packages copy is prepared
 - **WHEN** the GitHub Packages archive is built from the npm archive
@@ -13,7 +13,7 @@ The project SHALL publish a non-private npm package named `create-flisk` and a G
 
 #### Scenario: Consumer inspects package purpose
 - **WHEN** a consumer reads package metadata or its README
-- **THEN** they can identify the repository and understand that the package does not install an `npm create` command or executable
+- **THEN** they can identify the repository and understand that the executable points to `npx create-microservices` without installing or running the scaffolder
 
 ### Requirement: Dual registry release
 The project SHALL publish one package version with identical package contents to both npm and GitHub Packages. Publication SHALL be initiated by a GitHub Release whose tag version matches the package version, and SHALL NOT be triggered by pull requests or ordinary branch pushes.
